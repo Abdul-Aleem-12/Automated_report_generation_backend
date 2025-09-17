@@ -133,9 +133,15 @@ def generate_report(vuln_data: List[Dict], filepath: str):
     
     # Estimate TOC entries
     toc_data = [['Vulnerability Name', 'OWASP Category', 'Page']]
+    styles = getSampleStyleSheet()
+    toc_cell_style = styles['Normal']
     current_page = 3
     for vuln in vuln_data:
-        toc_data.append([vuln['vuln_name'], vuln['owasp_category'], str(current_page)])
+        toc_data.append([
+            Paragraph(vuln['vuln_name'], toc_cell_style),
+            Paragraph(vuln['owasp_category'], toc_cell_style),  # Wrap this cell
+            str(current_page)
+        ])
         current_page += 2
     
     toc_table = Table(toc_data, colWidths=[200, 200, 50])
