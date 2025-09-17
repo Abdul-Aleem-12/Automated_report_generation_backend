@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify, send_file
 from services.db_service import get_vulnerabilities
 from services.report_service import generate_report
+from flask_cors import CORS
 import datetime
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/generate-report", methods=["POST"])
 def generate_report_api():
